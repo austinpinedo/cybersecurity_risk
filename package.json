@@ -1,0 +1,12 @@
+{
+  "name": "juice-shop-login",
+  "version": "1.0.0",
+  "description": "basic login form similar to OWASP Juice Shop with client side and server side validation",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

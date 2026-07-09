@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
+<body>
+  <h1>Login</h1>
+
+  <div>
+    <label for="email">Email:</label><br>
+    <input type="text" id="email"><br><br>
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password"><br><br>
+
+    <button onclick="login()">Login</button>
+  </div>
+  <p id="output"></p>
+
+  <script>
+    function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const out = document.getElementById('output');
+
+      if (email === '' || password === '') {
+        out.textContent = 'fill in all fields';
+        return;
+      }
+
+      if (!email.includes('@')) {
+        out.textContent = 'email must contain "@"';
+        return;
+      }
+
+      if (password.length < 8) {
+        out.textContent = 'password must be at least 8 characters long';
+        return;
+      }
+
+      out.innerHTML = 'attempting login for: ' + email;
+
+      fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, password: password })
+      })
+      .then(res => res.json())
+      .then(data => {
+        out.innerHTML = data.message;
+      })
+      .catch(() => {
+        
+      });
+    }
+  </script>
+</body>
+</html>
